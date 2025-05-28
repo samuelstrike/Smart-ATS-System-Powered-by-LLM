@@ -51,6 +51,27 @@ Return the response in the following JSON format:
 }}
 """
 
+rewrite_prompt = """
+You are an expert resume writer. Your task is to improve the candidate's resume based on the following:
+
+1. The original resume.
+2. The job description.
+3. The improvement suggestions.
+
+Make sure the updated resume is highly relevant to the job description, includes all suggested keywords, and improves clarity, impact, and formatting. Keep it professional and structured.
+
+**Original Resume:**
+{text}
+
+**Job Description:**
+{jd}
+
+**Improvement Suggestions:**
+{suggestions}
+
+Provide the improved resume as a properly formatted plain text resume (not JSON or markdown).
+"""
+
 ## streamlit app
 st.title("Smart ATS Powered by Gemini 2.0 Flash")
 st.markdown("""
@@ -118,6 +139,20 @@ if submit:
             st.subheader("📈 Recommendations to Improve Score to 95%+")
             for suggestion in result.get("ImprovementSuggestions", []):
                 st.markdown(f"- ✅ {suggestion}")
+
+            # Resume Improvement Suggestions
+            suggestions = result.get("ImprovementSuggestions", [])
+            suggestions_text = "\n".join(suggestions)
+
+            # Create prompt to rewrite resume
+            rewrite_filled_prompt = rewrite_prompt.format(text=text, jd=jd, suggestions=suggestions_text)
+
+            # Get rewritten resume
+            rewritten_resume = get_gemini_repsonse(rewrite_filled_prompt)
+
+            # Display
+            st.subheader("🚀 Rewritten Resume (Optimized for this JD)")
+            st.code(rewritten_resume)
     
     else:
         st.warning("Please upload a resume and paste the job description.")
