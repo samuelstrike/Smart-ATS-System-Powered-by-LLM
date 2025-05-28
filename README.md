@@ -42,7 +42,7 @@ A Smart ATS (Applicant Tracking System) built with **Google's Gemini LLM** and *
 
 1. **Clone the repo**:
    ```bash
-   git clone https://github.com/yourusername/smart-ats-llm.git
+   git clone https://github.com/samuelstrike/Smart-ATS-System-Powered-by-LLM.git
    cd smart-ats-llm
 
 2. **Create virtual Env**:
