@@ -14,6 +14,13 @@ A Smart ATS (Applicant Tracking System) built with **Google's Gemini LLM** and *
   - Tailored suggestions to boost your match score to 95%+
 
 ---
+## 🖼️ Screenshots
+
+### 📊 Dashboard View
+![Dashboard](images/dashboard.png)
+
+### 📥 LLM Response Output
+![Output](images/response.png)
 
 ## 🛠️ Tech Stack
 
