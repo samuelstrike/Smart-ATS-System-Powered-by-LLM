@@ -4,8 +4,11 @@ import os
 import PyPDF2 as pdf
 from dotenv import load_dotenv
 import json
+from langchain_openai import ChatOpenAI
 
 load_dotenv() ## load all our environment variables
+
+os.environ['OPENAI_API_KEY'] = os.getenv("OPENAI_API_KEY")
 
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
@@ -73,7 +76,7 @@ Provide the improved resume as a properly formatted plain text resume (not JSON 
 """
 
 ## streamlit app
-st.title("Smart ATS Powered by Gemini 2.0 Flash")
+st.title("Smart ATS Powered by Gemini 2.0 Flash : By Samuel")
 st.markdown("""
 This app uses Google Gemini 2.0 Flash to analyze your resume against a job description and provide actionable insights to improve your ATS score.
 """)
@@ -124,7 +127,7 @@ if submit:
             for kw in keywords[half:]:
                 st.markdown(f"- {kw}")
 
-        st.subheader("🧠 Profile Summary")
+        st.subheader("Profile Summary")
         st.write(result.get("Profile Summary", "Not available"))
 
         jd_match_value = result.get("JD Match", "0").replace("%", "").strip()
@@ -136,7 +139,7 @@ if submit:
 
         if jd_score < 95:
             st.warning("Your JD Match is below 95%. Here are some suggestions to improve your resume:")
-            st.subheader("📈 Recommendations to Improve Score to 95%+")
+            st.subheader("Recommendations to Improve Score to 95%+")
             for suggestion in result.get("ImprovementSuggestions", []):
                 st.markdown(f"- ✅ {suggestion}")
 
