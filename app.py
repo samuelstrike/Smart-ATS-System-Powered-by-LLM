@@ -8,7 +8,7 @@ from langchain_openai import ChatOpenAI
 
 load_dotenv() ## load all our environment variables
 
-os.environ['OPENAI_API_KEY'] = os.getenv("OPENAI_API_KEY")
+# os.environ['OPENAI_API_KEY'] = os.getenv("OPENAI_API_KEY")
 
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
